@@ -15,7 +15,7 @@ export default function AddVaccine({ addVaccine }) {
     addVaccine(name, desc, ageLimit, govtPrice);
     setName("");
     setDesc("");
-    setAgeLimit(""); // Reset age limit as string
+    setAgeLimit(""); 
     setGovtPrice("");
   };
 
