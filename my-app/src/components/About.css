@@ -1,0 +1,125 @@
+.about-us-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background: linear-gradient(to bottom, #d3d3d3, #f7f7f7);
+    min-height: 100vh;
+    padding: 20px; /* Add padding for better spacing on smaller screens */
+}
+
+.card-container {
+    display: grid; /* Use CSS Grid for positioning */
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 20px; /* Space between cards */
+    margin-top: 20px; /* Space above the card container */
+}
+
+.card {
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transform transition */
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.card-title {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 15px;
+    transition: color 0.3s ease; /* Color transition for card title */
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #000000;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+    margin-top: 80px;
+}
+
+.btn-primary:hover {
+    background-color: #388E3C;
+    color: white;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.lead {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    color: #555;
+}
+
+/* Specific diagonal positioning for cards */
+.card:nth-child(1) {
+    grid-column: 1; /* First column */
+    grid-row: 1; /* First row */
+}
+
+.card:nth-child(2) {
+    grid-column: 2; /* Second column */
+    grid-row: 1; /* First row */
+}
+
+.card:nth-child(3) {
+    grid-column: 3; /* Third column */
+    grid-row: 1; /* First row */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+
+    .card-title {
+        font-size: 1.5rem; /* Adjust title size for smaller screens */
+    }
+
+    .lead {
+        font-size: 1rem; /* Adjust lead text size */
+    }
+
+    .btn-primary {
+        font-size: 1rem; /* Adjust button size */
+        padding: 10px 20px; /* Adjust padding for smaller screens */
+    }
+
+    .card-img-top {
+        height: 150px; /* Reduce image height for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .about-us-container {
+        padding: 10px; /* Add less padding for very small screens */
+    }
+
+    .card-title {
+        font-size: 1.3rem; /* Further adjust title size */
+    }
+
+    .btn-primary {
+        width: 100%; /* Make button full width */
+    }
+
+    .card-img-top {
+        height: 120px; /* Further reduce image height */
+    }
+}
