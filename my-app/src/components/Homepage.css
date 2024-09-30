@@ -1,4 +1,4 @@
-/* General Styles */
+
 .homepage {
     font-family: 'Arial', sans-serif;
     color: #333;
@@ -93,12 +93,11 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
-    opacity: 0; /* Initially hidden */
-    transform: translateY(50px); /* Initial transform */
-    transition: all 0.6s ease; /* Smooth transition */
+    opacity: 0; 
+    transform: translateY(50px); 
+    transition: all 0.6s ease; 
 }
 
-/* Show class applied when element is in view */
 .feature-item.show {
     opacity: 1;
     transform: translateY(0);
@@ -127,12 +126,12 @@
 }
 
 .feature-description {
-    border: 2px solid black; /* Black border */
-    padding: 15px; /* Some padding */
-    border-radius: 10px; /* Rounded corners */
-    background-color: rgba(255, 255, 255, 0.8); /* Light background */
-    max-width: 500px; /* Limit width */
-    margin: 0; /* Remove margin */
+    border: 2px solid black; 
+    padding: 15px; 
+    border-radius: 10px; 
+    background-color: rgba(255, 255, 255, 0.8); 
+    max-width: 500px; 
+    margin: 0; 
 }
 
 
