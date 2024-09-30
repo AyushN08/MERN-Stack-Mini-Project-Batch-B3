@@ -1,0 +1,72 @@
+.container {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #d3d3d3, #4d4d4d);
+    border-radius: 10px; /* Rounded corners for the container */
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    color: #4d4d4d; /* Title color to match your theme */
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+  }
+  
+  .list-group {
+    list-style: none; /* Remove default list styles */
+    padding: 0;
+  }
+
+  h5{
+    color: #000000;
+  }
+  
+  .vaccine-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transition effects */
+  }
+  
+  .vaccine-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  }
+  
+  .bg-success {
+    background-color: #28a745; /* Green background for completed */
+    color: white;
+  }
+  
+  .bg-danger {
+    background-color: #dc3545; /* Red background for not completed */
+    color: white;
+  }
+  
+  .status-indicator {
+    padding: 10px; /* Padding for status indicator */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above status indicator */
+  }
+  
+  .status-text {
+    font-weight: bold; /* Make the status text bold */
+  }
+  
+  .text-white {
+    color: white; /* White text for contrast */
+  }
+  
+  /* Additional styles for mobile responsiveness */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem; /* Smaller title on mobile */
+    }
+  
+    .vaccine-card {
+      padding: 15px; /* Adjust padding for mobile */
+    }
+  }
+  
