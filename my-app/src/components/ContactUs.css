@@ -1,0 +1,93 @@
+.contact-us {
+    padding: 60px 50px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(to bottom, #d3d3d3, #4d4d4d);
+    animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.contact-us h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    transition: color 0.3s ease; /* Transition for heading color */
+}
+
+.contact-us p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-field {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    transition: border-color 0.3s ease; /* Transition for border color */
+}
+
+.input-field:focus {
+    border-color: #ffffff; /* Change border color on focus */
+    outline: none; /* Remove outline */
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.cta-button {
+    padding: 12px 30px;
+    background-color: white;
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition for button */
+    margin-top: 10px;
+}
+
+.cta-button:hover {
+    background-color: #000000;
+    color: white;
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .contact-us {
+        padding: 40px 20px;
+    }
+
+    .contact-us h2 {
+        font-size: 2rem;
+    }
+
+    .contact-us p {
+        font-size: 1rem;
+    }
+
+    .contact-form {
+        padding: 10px; /* Add padding to form on smaller screens */
+    }
+}
