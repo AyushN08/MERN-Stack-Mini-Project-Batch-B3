@@ -32,7 +32,7 @@
   .nav-link:visited {
     color: white; 
     padding: 0.5rem 1rem;
-    text-decoration: none;
+    text-decoration: underline;
     font-size: 1.40rem; 
     font-weight:600; 
     transition: all 0.3s ease; /* Keep the color the same */
