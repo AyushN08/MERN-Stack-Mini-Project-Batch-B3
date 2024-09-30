@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './MyVaccines.css'; // Import CSS for styling
 
 const MyVaccines = () => {
   const [vaccines, setVaccines] = useState([]);
@@ -13,20 +14,20 @@ const MyVaccines = () => {
 
   return (
     <div className="container my-3">
-      <h2>My Vaccines</h2>
+      <h2 className="section-title">My Vaccines</h2>
       {vaccines.length > 0 ? (
         <ul className="list-group">
           {vaccines.map((vaccine) => (
-            <li key={vaccine.sno} className="list-group-item">
+            <li key={vaccine.sno} className="list-group-item vaccine-card">
               <h5>{vaccine.name}</h5>
               <p>{vaccine.desc}</p>
-              <small>Age Limit: {vaccine.ageLimit}</small><br />
-              <small>Government Price: ₹{vaccine.govtPrice}</small><br />
+              <small>Age Limit: <strong>{vaccine.ageLimit}</strong></small><br />
+              <small>Government Price: <strong>₹{vaccine.govtPrice}</strong></small><br />
               <div 
-                className={`mt-2 p-2 ${vaccine.completed ? 'bg-success text-white' : 'bg-danger text-white'}`}
+                className={`mt-2 p-2 status-indicator ${vaccine.completed ? 'bg-success' : 'bg-danger'}`}
                 style={{ borderRadius: '5px' }}
               >
-                <small>
+                <small className="status-text">
                   {vaccine.completed ? 
                     `Completed by: ${vaccine.completionInfo.completedBy} on ${vaccine.completionInfo.completedDate}` : 
                     "Not completed yet"}
