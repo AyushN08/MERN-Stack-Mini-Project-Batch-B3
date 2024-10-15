@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './MyVaccines.css'; // Import CSS for styling
+ // Import CSS for styling
 
 const MyVaccines = () => {
   const [vaccines, setVaccines] = useState([]);

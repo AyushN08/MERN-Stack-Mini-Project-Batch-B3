@@ -33,10 +33,19 @@ const Homepage = () => {
       });
     }, { threshold: 0.2 });
 
-    featureRef.current.forEach((item) => observer.observe(item));
+    // Ensure all items in featureRef.current are valid elements
+    featureRef.current.forEach((item) => {
+      if (item) {
+        observer.observe(item);
+      }
+    });
 
     return () => {
-      featureRef.current.forEach((item) => observer.unobserve(item));
+      featureRef.current.forEach((item) => {
+        if (item) {
+          observer.unobserve(item);
+        }
+      });
     };
   }, []);
 
@@ -73,35 +82,34 @@ const Homepage = () => {
       <section className="why-immunilink">
         <h2>Why Choose ImmuniLink?</h2>
         <div className="features">
-  <div className="feature-item" ref={(el) => featureRef.current[0] = el}>
-    <img src="./calendar.jpg" alt="Track Vaccinations" className="feature-icon" />
-    <div>
-      <h3>Easily Track Vaccinations</h3>
-      <div className="feature-description">
-        <p>With ImmuniLink, keeping track of your child’s vaccination history has never been simpler. Our intuitive interface allows you to easily log and monitor past and upcoming vaccinations, ensuring you’re always informed about your child's health milestones.</p>
-      </div>
-    </div>
-  </div>
-  <div className="feature-item" ref={(el) => featureRef.current[1] = el}>
-    <img src="./alarm.png" alt="Timely Notifications" className="feature-icon" />
-    <div>
-      <h3>Timely Notifications</h3>
-      <div className="feature-description">
-        <p>Receive timely alerts for upcoming vaccinations, ensuring your child stays on schedule. Our system will send you reminders days before each appointment, so you can plan ahead with peace of mind.</p>
-      </div>
-    </div>
-  </div>
-  <div className="feature-item" ref={(el) => featureRef.current[2] = el}>
-    <img src="./file.png" alt="Secure Records" className="feature-icon" />
-    <div>
-      <h3>Secure Record Storage</h3>
-      <div className="feature-description">
-        <p>Store all your child’s vaccination records securely in one place. ImmuniLink uses top-tier encryption to keep sensitive information safe, while still making it easy for you to access anytime, anywhere.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
+          <div className="feature-item" ref={(el) => featureRef.current[0] = el}>
+            <img src="./calendar.jpg" alt="Track Vaccinations" className="feature-icon" />
+            <div>
+              <h3>Easily Track Vaccinations</h3>
+              <div className="feature-description">
+                <p>With ImmuniLink, keeping track of your child’s vaccination history has never been simpler. Our intuitive interface allows you to easily log and monitor past and upcoming vaccinations, ensuring you’re always informed about your child's health milestones.</p>
+              </div>
+            </div>
+          </div>
+          <div className="feature-item" ref={(el) => featureRef.current[1] = el}>
+            <img src="./alarm.png" alt="Timely Notifications" className="feature-icon" />
+            <div>
+              <h3>Timely Notifications</h3>
+              <div className="feature-description">
+                <p>Receive timely alerts for upcoming vaccinations, ensuring your child stays on schedule. Our system will send you reminders days before each appointment, so you can plan ahead with peace of mind.</p>
+              </div>
+            </div>
+          </div>
+          <div className="feature-item" ref={(el) => featureRef.current[2] = el}>
+            <img src="./file.png" alt="Secure Records" className="feature-icon" />
+            <div>
+              <h3>Secure Record Storage</h3>
+              <div className="feature-description">
+                <p>Store all your child’s vaccination records securely in one place. ImmuniLink uses top-tier encryption to keep sensitive information safe, while still making it easy for you to access anytime, anywhere.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Testimonials Section */}
