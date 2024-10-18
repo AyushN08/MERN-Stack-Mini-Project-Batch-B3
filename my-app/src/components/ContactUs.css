@@ -1,9 +1,10 @@
 .contact-us {
     padding: 60px 50px;
     text-align: center;
-    color: white;
-    background: linear-gradient(to bottom, #d3d3d3, #4d4d4d);
-    animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+    color: #333; 
+    background: linear-gradient(to bottom, white, #e0f7e0);
+    animation: fadeIn 1s ease-in-out; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 @keyframes fadeIn {
@@ -12,73 +13,108 @@
 }
 
 .contact-us h2 {
-    font-size: 2.5rem;
+    font-size: 3rem; 
     margin-bottom: 20px;
-    transition: color 0.3s ease; /* Transition for heading color */
+    transition: color 0.3s ease;
+    color: #4caf50;
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: bold;
 }
 
 .contact-us p {
     font-size: 1.2rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    color: #666; 
 }
+
 
 .contact-form {
     max-width: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px; 
 }
 
 .contact-form label {
     display: flex;
     flex-direction: column;
     text-align: left;
+    font-size: 1rem;
+    color: #333;
+    font-family: 'Open Sans', sans-serif; 
 }
 
 .input-field {
-    padding: 10px;
-    border: 2px solid black;
+    padding: 15px;
+    border: 2px solid #4caf50;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9); 
     color: #333;
-    transition: border-color 0.3s ease; /* Transition for border color */
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
 }
 
 .input-field:focus {
-    border-color: #ffffff; /* Change border color on focus */
-    outline: none; /* Remove outline */
+    border-color: #4caf50;
+    outline: none;
 }
 
 .contact-form textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 150px; 
 }
 
 .cta-button {
     padding: 12px 30px;
-    background-color: white;
-    color: #000000;
+    background-color: #fff;
+    color: #4caf50; 
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition for button */
+    transition: background-color 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .cta-button:hover {
-    background-color: #000000;
+    background-color: #4caf50;
     color: white;
-    transform: scale(1.05); /* Scale effect on hover */
+    transform: scale(1.05);
 }
 
-/* Media Queries for Responsive Design */
+.icon {
+    margin-right: 8px;
+    color: #4caf50; 
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
 @media (max-width: 768px) {
     .contact-us {
         padding: 40px 20px;
     }
 
+    .contact-us h2 {
+        font-size: 2.5rem;
+    }
+
+    .contact-us p {
+        font-size: 1.1rem;
+    }
+
+    .contact-form {
+        padding: 15px;
+    }
+
+    .cta-button {
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 576px) {
     .contact-us h2 {
         font-size: 2rem;
     }
@@ -87,7 +123,7 @@
         font-size: 1rem;
     }
 
-    .contact-form {
-        padding: 10px; /* Add padding to form on smaller screens */
+    .cta-button {
+        padding: 10px 20px;
     }
 }

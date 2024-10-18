@@ -4,7 +4,7 @@ import Homepage from './components/Homepage';
 import Doctor from "./components/Doctor";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import ContactUs from "./components/ContactUs"; // Import ContactUs component
+import ContactUs from "./components/ContactUs"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyVaccines from "./components/myVaccines";
 import Login from "./components/Login";

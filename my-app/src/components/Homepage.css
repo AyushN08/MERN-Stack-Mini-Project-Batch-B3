@@ -1,11 +1,10 @@
-
 .homepage {
     font-family: 'Arial', sans-serif;
     color: #333;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(to bottom, #d3d3d3, #4d4d4d);
+    background: linear-gradient(to bottom, white, #e0f7e0); 
     min-height: 100vh;
 }
 
@@ -14,7 +13,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 100px 50px;
-    color: white;
+    color: #333;
+    background: #e0f7e0;
 }
 
 .hero-content {
@@ -27,6 +27,7 @@
     font-size: 3rem;
     margin-bottom: 20px;
     font-weight: 700;
+    color: black; 
 }
 
 .hero-content p {
@@ -36,8 +37,8 @@
 
 .cta-button {
     padding: 12px 30px;
-    background-color: white;
-    color: #4CAF50;
+    background-color: #4CAF50; 
+    color: white;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -67,23 +68,23 @@
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Why ImmuniLink Section */
+
 .why-immunilink {
-    padding: 60px 50px;
+    padding: 60px 20px;
     text-align: center;
-    color: white;
 }
 
 .why-immunilink h2 {
-    font-size: 2.2rem;
-    margin-bottom: 40px;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: black; 
 }
 
 .features {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
 }
 
 .feature-item {
@@ -93,9 +94,9 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
-    opacity: 0; 
-    transform: translateY(50px); 
-    transition: all 0.6s ease; 
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
 }
 
 .feature-item.show {
@@ -110,12 +111,13 @@
 .feature-icon {
     max-width: 250px;
     height: auto;
-    margin: 0 40px;
+    margin: 0 20px;
 }
 
 .feature-item h3 {
     font-size: 1.4rem;
     margin-bottom: 10px;
+    color: black;
 }
 
 .feature-item p {
@@ -126,25 +128,25 @@
 }
 
 .feature-description {
-    border: 2px solid black; 
-    padding: 15px; 
-    border-radius: 10px; 
-    background-color: rgba(255, 255, 255, 0.8); 
-    max-width: 500px; 
-    margin: 0; 
+    border: 2px solid #006400; 
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    max-width: 500px;
+    margin: 0;
 }
 
-
-/* Testimonials Section */
 .testimonials {
     padding: 80px 50px;
     text-align: center;
-    color: white;
+    background: linear-gradient(to right, white, #f0fff4); 
+    color: #333;
 }
 
 .testimonials h2 {
     font-size: 2.2rem;
     margin-bottom: 40px;
+    color: black;
 }
 
 .testimonial-slider {
@@ -160,6 +162,7 @@
     border-radius: 15px;
     max-width: 600px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #006400; 
     transition: transform 0.5s ease;
     z-index: 1;
 }
@@ -181,7 +184,7 @@
     top: 50%;
     background-color: transparent;
     border: none;
-    color: white;
+    color: #006400;
     font-size: 2rem;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -189,7 +192,7 @@
 }
 
 .slider-button:hover {
-    color: #ffcc00;
+    color: #388E3C; 
 }
 
 .left {
@@ -204,12 +207,12 @@
 .cta-section {
     padding: 60px 50px;
     text-align: center;
-    color: white;
 }
 
 .cta-section h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: black;
 }
 
 .cta-section p {
@@ -219,8 +222,8 @@
 
 .cta-button {
     padding: 12px 30px;
-    background-color: white;
-    color: #000000;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -229,6 +232,49 @@
 }
 
 .cta-button:hover {
-    background-color: #000000;
-    color: white;
+    background-color: #388E3C;
+}
+
+@media (max-width: 768px) {
+    .feature-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .feature-icon {
+        margin: 0 0 20px 0;
+        max-width: 150px;
+    }
+
+    .feature-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .feature-item p {
+        font-size: 0.9rem;
+    }
+
+    .features {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .why-immunilink h2 {
+        font-size: 1.8rem;
+    }
+
+    .feature-icon {
+        max-width: 120px;
+    }
+
+    .feature-item h3 {
+        font-size: 1rem;
+    }
+
+    .feature-item p {
+        font-size: 0.85rem;
+    }
 }

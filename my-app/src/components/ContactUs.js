@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ContactUs.css';
+import { FaUser, FaEnvelope, FaCommentDots } from 'react-icons/fa'; 
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +16,8 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send formData to your server
     alert('Thank you for your message!');
-    setFormData({ name: '', email: '', message: '' }); // Reset form
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
@@ -25,8 +25,10 @@ const ContactUs = () => {
       <h2>Contact Us</h2>
       <p>If you have any questions or feedback, feel free to reach out to us!</p>
       <p>We’re here to help you with any concerns regarding our services, and we value your feedback!</p>
+
       <form onSubmit={handleSubmit} className="contact-form">
         <label>
+          <FaUser className="icon" />
           Name:
           <input
             type="text"
@@ -37,7 +39,9 @@ const ContactUs = () => {
             className="input-field"
           />
         </label>
+
         <label>
+          <FaEnvelope className="icon" />
           Email:
           <input
             type="email"
@@ -48,7 +52,9 @@ const ContactUs = () => {
             className="input-field"
           />
         </label>
+
         <label>
+          <FaCommentDots className="icon" />
           Message:
           <textarea
             name="message"
@@ -58,6 +64,7 @@ const ContactUs = () => {
             className="input-field"
           />
         </label>
+
         <button type="submit" className="cta-button">Send Message</button>
       </form>
     </div>
