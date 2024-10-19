@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import "./AddVaccine.css"; 
 
 export default function AddVaccine({ addVaccine }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [ageLimit, setAgeLimit] = useState(""); // Age limit as string
+  const [ageLimit, setAgeLimit] = useState(""); 
   const [govtPrice, setGovtPrice] = useState("");
 
   const submit = (e) => {
@@ -20,8 +21,8 @@ export default function AddVaccine({ addVaccine }) {
   };
 
   return (
-    <div className="container my-3">
-      <h3>Add a Vaccine</h3>
+    <div className="add-vaccine-container">
+      <h3 className="form-title">Add a Vaccine</h3>
       <form onSubmit={submit}>
         <div className="mb-3">
           <label htmlFor="vaccineName" className="form-label">
@@ -53,7 +54,7 @@ export default function AddVaccine({ addVaccine }) {
 
         <div className="mb-3">
           <label htmlFor="vaccineAgeLimit" className="form-label">
-            Age Limit (as string)
+            Age Limit
           </label>
           <input
             type="text"
@@ -79,7 +80,7 @@ export default function AddVaccine({ addVaccine }) {
           />
         </div>
 
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-primary">
           Add Vaccine
         </button>
       </form>

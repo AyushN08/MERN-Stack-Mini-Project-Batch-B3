@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
- // Import CSS for styling
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'; 
+import './MyVaccines.css'; 
 
 const MyVaccines = () => {
   const [vaccines, setVaccines] = useState([]);
 
   useEffect(() => {
-    // Fetch the vaccines from local storage
     const savedVaccines = localStorage.getItem("vaccines");
     if (savedVaccines) {
       setVaccines(JSON.parse(savedVaccines));
@@ -13,31 +13,39 @@ const MyVaccines = () => {
   }, []);
 
   return (
-    <div className="container my-3">
+    <div className="myVaccines-container">
       <h2 className="section-title">My Vaccines</h2>
       {vaccines.length > 0 ? (
         <ul className="list-group">
           {vaccines.map((vaccine) => (
             <li key={vaccine.sno} className="list-group-item vaccine-card">
-              <h5>{vaccine.name}</h5>
-              <p>{vaccine.desc}</p>
-              <small>Age Limit: <strong>{vaccine.ageLimit}</strong></small><br />
-              <small>Government Price: <strong>₹{vaccine.govtPrice}</strong></small><br />
+              <h5 className="vaccine-name">{vaccine.name}</h5>
+              <p className="vaccine-desc">{vaccine.desc}</p>
+              <div className="vaccine-details">
+                <small>Age Limit: <strong>{vaccine.ageLimit}</strong></small>
+                <small>Government Price: <strong>₹{vaccine.govtPrice}</strong></small>
+              </div>
               <div 
-                className={`mt-2 p-2 status-indicator ${vaccine.completed ? 'bg-success' : 'bg-danger'}`}
-                style={{ borderRadius: '5px' }}
+                className={`status-indicator ${vaccine.completed ? 'bg-success' : 'bg-danger'}`}
               >
                 <small className="status-text">
                   {vaccine.completed ? 
-                    `Completed by: ${vaccine.completionInfo.completedBy} on ${vaccine.completionInfo.completedDate}` : 
-                    "Not completed yet"}
+                    <>
+                      <FaCheckCircle className="icon-success" /> 
+                      Completed by: {vaccine.completionInfo.completedBy} on {vaccine.completionInfo.completedDate}
+                    </> : 
+                    <>
+                      <FaTimesCircle className="icon-danger" /> 
+                      Not completed yet
+                    </>
+                  }
                 </small>
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No vaccines available.</p>
+        <p className="no-vaccines">No vaccines available.</p>
       )}
     </div>
   );

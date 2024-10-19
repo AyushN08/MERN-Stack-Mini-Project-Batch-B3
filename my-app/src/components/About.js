@@ -1,19 +1,19 @@
 import React from 'react';
-import './About.css'; // Import the new CSS file
+import './About.css'; 
 
 const About = () => {
   return (
     <div className="about-us-container p-5">
       <div className="row align-items-center mb-5 text-center">
-        <div className="col-md-6 mx-auto">
-          <h1 className="display-4 font-weight-bold">Welcome to ImmuniLink</h1>
-          <p className="lead">Manage and track your child's vaccinations online with ease</p>
+        <div className="col-md-8 mx-auto">
+          <h1 className="display-4 font-weight-bold welcome-title">Welcome to ImmuniLink</h1>
+          <p className="lead tagline">Manage and track your child's vaccinations online with ease</p>
         </div>
       </div>
 
       <div className="card-container">
         <div className="card">
-          <img src="./target.png" className="card-img-top" alt="Our Mission" />
+          <img src={`${process.env.PUBLIC_URL}/target.png`} className="card-img-top" alt="Our Mission" />
           <div className="card-body">
             <h4 className="card-title">Our Mission</h4>
             <p className="card-text">
@@ -29,7 +29,7 @@ const About = () => {
         </div>
 
         <div className="card">
-          <img src="./works.jpg" className="card-img-top" alt="How it Works" />
+          <img src={`${process.env.PUBLIC_URL}/works.jpg`} className="card-img-top" alt="How it Works" />
           <div className="card-body">
             <h4 className="card-title">How it Works</h4>
             <p className="card-text">
@@ -44,7 +44,7 @@ const About = () => {
         </div>
 
         <div className="card">
-          <img src="./why.jpg" className="card-img-top" alt="Why Choose Us" />
+          <img src={`${process.env.PUBLIC_URL}/why.jpg`} className="card-img-top" alt="Why Choose Us" />
           <div className="card-body">
             <h4 className="card-title">Why Choose ImmuniLink?</h4>
             <p className="card-text">By using ImmuniLink's web platform, you can:</p>

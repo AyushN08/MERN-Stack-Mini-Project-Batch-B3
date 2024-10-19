@@ -1,0 +1,40 @@
+.footer-title {
+    font-size: 1.8rem; 
+    color: #a4d65e; 
+    margin-bottom: 15px; 
+  }
+  
+  .footer-subtitle {
+    font-size: 1.2rem; 
+    color: #e0e0e0; 
+    margin-bottom: 10px; 
+  }
+  
+  .email-input {
+    border-radius: 20px; 
+  }
+  
+  .btn-primary {
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 20px; 
+    transition: background-color 0.3s; 
+  }
+  
+  .btn-primary:hover {
+    background-color: #4cae4c; 
+  }
+  
+  .list-unstyled li {
+    color: #ccc; 
+    margin-bottom: 5px; 
+  }
+  
+  .list-unstyled li:hover {
+    color: #a4d65e; 
+  }
+  
+  .small {
+    color: #bbb; 
+  }
+  

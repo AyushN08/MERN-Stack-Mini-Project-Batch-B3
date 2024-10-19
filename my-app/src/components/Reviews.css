@@ -1,0 +1,71 @@
+.reviews-container {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #e9f5e9, #f7f7f7); 
+    padding: 60px 20px; 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+  .reviews-title {
+    font-size: 2.8rem; 
+    color: #3c803c; 
+    margin-bottom: 40px; 
+    text-align: center; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    position: relative; 
+  }
+  
+  .reviews-title::after {
+    content: ''; 
+    display: block;
+    width: 50%; 
+    height: 4px; 
+    background: #3c803c; 
+    margin: 10px auto; 
+    border-radius: 5px; 
+  }
+  
+  .reviews-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; 
+    max-width: 1200px; 
+    width: 100%; 
+  }
+  
+  .review-card {
+    background: #fff; 
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    position: relative; 
+    overflow: hidden; 
+  }
+  
+  .review-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-5px); 
+  }
+  
+  .reviewer-name {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #3c803c; 
+  }
+  
+  .review-text {
+    font-size: 1.1rem; 
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .rating {
+    font-size: 1.5rem; 
+    color: #ffcc00; 
+  }
+  
