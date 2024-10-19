@@ -7,18 +7,55 @@ const Register = () => {
     parentMobile: "",
     parentEmail: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform registration logic here
-    console.log("Form submitted:", formData);
+    setLoading(true);
+    setError("");
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Registration Successful! You can now log in.');
+        setFormData({
+          childName: "",
+          birthDate: "",
+          parentMobile: "",
+          parentEmail: "",
+          password: "",
+          confirmPassword: "",
+        });
+      } else {
+        setError(result.message || "Registration failed!");
+      }
+    } catch (err) {
+      console.error("Registration Error:", err);
+      setError("An error occurred during registration");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,7 +80,9 @@ const Register = () => {
                         Register a new account
                       </h5>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+
+                      <div className="form-outline mb-4">
                         <input
                           type="text"
                           id="childName"
@@ -56,7 +95,7 @@ const Register = () => {
                         <label className="form-label" htmlFor="childName">Child's Name</label>
                       </div>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="date"
                           id="birthDate"
@@ -69,7 +108,7 @@ const Register = () => {
                         <label className="form-label" htmlFor="birthDate">Child's Birth Date</label>
                       </div>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="tel"
                           id="parentMobile"
@@ -82,7 +121,7 @@ const Register = () => {
                         <label className="form-label" htmlFor="parentMobile">Parent's Mobile Number</label>
                       </div>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="email"
                           id="parentEmail"
@@ -95,7 +134,7 @@ const Register = () => {
                         <label className="form-label" htmlFor="parentEmail">Parent's Email Address</label>
                       </div>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="password"
                           id="password"
@@ -108,7 +147,7 @@ const Register = () => {
                         <label className="form-label" htmlFor="password">Password</label>
                       </div>
 
-                      <div data-mdb-input-init className="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="password"
                           id="confirmPassword"
@@ -121,15 +160,14 @@ const Register = () => {
                         <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
                       </div>
 
-                      <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg btn-block" type="submit">
-                          Register
-                        </button>
-                      </div>
+                      <button className="btn btn-dark btn-lg btn-block" type="submit" disabled={loading}>
+                        {loading ? "Registering..." : "Register"}
+                      </button>
 
                       <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                         Already have an account? <a href="/login" style={{ color: "#393f81" }}>Login here</a>
                       </p>
+
                       <a href="#!" className="small text-muted">Terms of use.</a>
                       <a href="#!" className="small text-muted">Privacy policy</a>
                     </form>

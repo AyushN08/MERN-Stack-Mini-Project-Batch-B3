@@ -1,10 +1,51 @@
 import React, { useState } from "react";
 
 const Login = () => {
-  const [userType, setUserType] = useState("patient"); // Default user type
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleUserTypeChange = (event) => {
-    setUserType(event.target.value);
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const loginData = {
+      email,
+      password
+    };
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text(); 
+        console.error("Login Error:", errorMessage);
+        alert('Login failed: ' + errorMessage);
+        return; 
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        console.log("Login Success:", result);
+        localStorage.setItem('token', result.jwtToken);
+        alert('Login Successful');
+      } else {
+        alert(result.message); 
+      }
+    } catch (err) {
+      console.error("Login Error:", err);
+      alert('An error occurred during login');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -15,61 +56,57 @@ const Login = () => {
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div className="row g-0">
                 <div className="col-md-6 col-lg-5 d-none d-md-block">
-                 
-                <img src={require('./image.png')} alt="login form" className="img-fluid" style={{ borderRadius: "1rem 0 0 1rem" }} />
-
+                  <img
+                    src={require('./image.png')}
+                    alt="login form"
+                    className="img-fluid"
+                    style={{ borderRadius: "1rem 0 0 1rem" }}
+                  />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>
                         Sign into your account
                       </h5>
 
-                      <div className="mb-4">
-                        <p className="text-secondary">Login as:</p>
-                        <div>
-                          <label>
-                            <input
-                              type="radio"
-                              value="doctor"
-                              checked={userType === "doctor"}
-                              onChange={handleUserTypeChange}
-                              style={{ marginRight: "5px" }}
-                            />
-                            Doctor
-                          </label>
-                          <label style={{ marginLeft: "20px" }}>
-                            <input
-                              type="radio"
-                              value="patient"
-                              checked={userType === "patient"}
-                              onChange={handleUserTypeChange}
-                              style={{ marginRight: "5px" }}
-                            />
-                            Patient
-                          </label>
-                        </div>
-                      </div>
-
+                      {/* Email Input */}
                       <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="email" id="form2Example17" className="form-control form-control-lg" />
+                        <input
+                          type="email"
+                          id="form2Example17"
+                          className="form-control form-control-lg"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
                         <label className="form-label" htmlFor="form2Example17">Email address</label>
                       </div>
 
+                      {/* Password Input */}
                       <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="password" id="form2Example27" className="form-control form-control-lg" />
+                        <input
+                          type="password"
+                          id="form2Example27"
+                          className="form-control form-control-lg"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        />
                         <label className="form-label" htmlFor="form2Example27">Password</label>
                       </div>
 
+                      {/* Submit Button */}
                       <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                        <button className="btn btn-dark btn-lg btn-block" type="submit" disabled={loading}>
+                          {loading ? 'Logging in...' : 'Login'}
+                        </button>
                       </div>
 
                       <a className="small text-muted" href="#!">Forgot password?</a>
                       <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-  Don't have an account? <a href="/register" style={{ color: "#393f81" }}>Register here</a>
-</p>
+                        Don't have an account? <a href="/register" style={{ color: "#393f81" }}>Register here</a>
+                      </p>
 
                       <a href="#!" className="small text-muted">Terms of use.</a>
                       <a href="#!" className="small text-muted">Privacy policy</a>

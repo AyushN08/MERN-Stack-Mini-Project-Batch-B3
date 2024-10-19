@@ -2,9 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+                
   "scripts": {
-    "start": "nodemon index.js"
-  },
+  "start": "nodemon index.js"
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,9 +19,10 @@
     "express": "^4.21.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.9.0",
     "mongoose": "^8.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"  
+    "nodemon": "^2.0.22"
   }
 }
