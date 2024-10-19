@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react"; // Import useState and useEffect
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Navbar.css'; // Import the CSS file
 
 function Navbar({ searchBar }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,77 +19,9 @@ function Navbar({ searchBar }) {
     // Clear the token and any user data from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('loggedInUserEmail');
-
     // Redirect the user to the login page
     navigate('/signin');
   };
-
-  return (
-    <nav className="navbar">
-      <div className="container-fluid" style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
-        <ul className="navbar-nav">
-          <Link className="navbar-brand" to="/">
-            ImmuniLink
-          </Link>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/myVaccines">
-              My Vaccines
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">
-              About Us
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/reviews">
-              Reviews
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contact">
-              Contact Us
-            </Link>
-          </li>
-          {/* Always show Logout */}
-          <li className="nav-item">
-            <button className="nav-link btn btn-link" onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
-        </ul>
-
-        {searchBar && (
-          <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        )}
-      </div>
-    </nav>
-  );
-}
-
-export default Navbar;
-=======
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import './Navbar.css'; // Import the CSS file
-
-function Navbar({ searchBar }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -124,8 +56,11 @@ function Navbar({ searchBar }) {
           <li className="nav-item">
             <Link className="nav-link" to="/contact">Contact Us</Link>
           </li>
+          {/* Show Logout option always */}
           <li className="nav-item">
-            <Link className="nav-link SignIn" to="/signin">Sign In</Link>
+            <button className="nav-link btn btn-link" onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
 
@@ -151,6 +86,11 @@ function Navbar({ searchBar }) {
             <li>
               <Link className="nav-link SignIn" to="/signin" onClick={toggleSidebar}>Sign In</Link>
             </li>
+            <li>
+              <button className="nav-link btn btn-link" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -172,4 +112,3 @@ function Navbar({ searchBar }) {
 }
 
 export default Navbar;
->>>>>>> f14b0a0503553ae36b84d2172aeb9dc0f56054e3
