@@ -13,16 +13,21 @@ import Register from "./components/Register";
 function App() {
   return (
     <Router>
+      <Routes>
+      <Route path="/signin" element={<Login />} />
+       
+        <Route path="/register" element={<Register />} />
+
+        </Routes>
       <Navbar searchBar={false} />
       
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/doctor" element={<Doctor />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/contact" element={<ContactUs />} /> {/* Added ContactUs route */}
-        <Route path="/signin" element={<Login />} />
+        <Route exact path="/contact" element={<ContactUs />} />
         <Route path="/myVaccines" element={<MyVaccines />} />
-        <Route path="/register" element={<Register />} />
+        
       </Routes>
 
       <Footer />

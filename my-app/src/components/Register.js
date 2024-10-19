@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Register = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [formData, setFormData] = useState({
     childName: "",
     birthDate: "",
@@ -39,14 +41,8 @@ const Register = () => {
 
       if (response.ok) {
         alert('Registration Successful! You can now log in.');
-        setFormData({
-          childName: "",
-          birthDate: "",
-          parentMobile: "",
-          parentEmail: "",
-          password: "",
-          confirmPassword: "",
-        });
+        // Redirect to login page after successful registration
+        navigate('/signin'); 
       } else {
         setError(result.message || "Registration failed!");
       }
@@ -165,7 +161,7 @@ const Register = () => {
                       </button>
 
                       <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                        Already have an account? <a href="/login" style={{ color: "#393f81" }}>Login here</a>
+                        Already have an account? <a href="/signin" style={{ color: "#393f81" }}>Login here</a>
                       </p>
 
                       <a href="#!" className="small text-muted">Terms of use.</a>

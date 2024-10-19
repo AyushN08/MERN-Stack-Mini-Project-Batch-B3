@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS file for toast notifications
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +31,7 @@ const Login = () => {
       if (!response.ok) {
         const errorMessage = await response.text(); 
         console.error("Login Error:", errorMessage);
-        alert('Login failed: ' + errorMessage);
+        toast.error('Login failed: ' + errorMessage); // Use toast for error
         return; 
       }
 
@@ -36,13 +40,15 @@ const Login = () => {
       if (result.success) {
         console.log("Login Success:", result);
         localStorage.setItem('token', result.jwtToken);
-        alert('Login Successful');
+        localStorage.setItem('loggedInUserEmail', email); // Fixed typo from setIteam to setItem
+        toast.success('Login Successful'); // Use toast for success
+        navigate('/');
       } else {
-        alert(result.message); 
+        toast.error(result.message); // Use toast for error
       }
     } catch (err) {
       console.error("Login Error:", err);
-      alert('An error occurred during login');
+      toast.error('An error occurred during login'); // Use toast for error
     } finally {
       setLoading(false);
     }
@@ -118,6 +124,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer /> {/* Include the ToastContainer to render toasts */}
     </section>
   );
 };
