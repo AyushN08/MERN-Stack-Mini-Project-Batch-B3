@@ -78,7 +78,7 @@ function Navbar({ searchBar }) {
               <Link className="nav-link" to="/about" onClick={toggleSidebar}>About Us</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/reviews" onClick={toggleSidebar}>Reviews</Link>
+              <Link className="nav-link" to="/Reviews" onClick={toggleSidebar}>Reviews</Link>
             </li>
             <li>
               <Link className="nav-link" to="/contact" onClick={toggleSidebar}>Contact Us</Link>

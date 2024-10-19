@@ -10,7 +10,7 @@ import MyVaccines from "./components/myVaccines";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { useLocation } from "react-router-dom"; // Import useLocation here
-
+import Reviews from "./components/Reviews";
 function App() {
   return (
     <Router>
@@ -37,6 +37,8 @@ function AppContent() {
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<ContactUs />} />
         <Route path="/myVaccines" element={<MyVaccines />} />
+        <Route path="/Reviews" element={<Reviews/>}/>
+
       </Routes>
       
       {!hideNavAndFooter && <Footer />}
