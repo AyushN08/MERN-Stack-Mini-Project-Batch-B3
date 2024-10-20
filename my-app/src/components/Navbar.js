@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import './Navbar.css'; // Import the CSS file
 
 function Navbar({ searchBar }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    // Check if the user is logged in by verifying the token
     const token = localStorage.getItem('token');
-    if (!token) {
-      // If no token, navigate to sign-in page
+    
+    // List of protected routes
+    const protectedRoutes = ['/', '/myVaccines', '/about', '/reviews', '/contact'];
+
+    // Check if the current path is in the protected routes and if the token is absent
+    if (protectedRoutes.includes(location.pathname) && !token) {
       navigate('/signin');
     }
-  }, [navigate]);
+  }, [navigate, location]);
 
   const handleLogout = () => {
-    // Clear the token and any user data from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('loggedInUserEmail');
-    // Redirect the user to the login page
     navigate('/signin');
   };
 
@@ -31,15 +33,13 @@ function Navbar({ searchBar }) {
     <nav className="navbar">
       <div className="container-fluid" style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
         <Link className="navbar-brand" to="/">
-          <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="ImmuniLink Logo" style={{ height: '60px' }} /> {/* Set the desired height */}
+          <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="ImmuniLink Logo" style={{ height: '60px' }} />
         </Link>
 
-        {/* Toggle Button for Small Screens */}
         <button className="navbar-toggle" onClick={toggleSidebar}>
           ☰
         </button>
 
-        {/* Navbar Links (hidden on small screens) */}
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>
@@ -56,7 +56,6 @@ function Navbar({ searchBar }) {
           <li className="nav-item">
             <Link className="nav-link" to="/contact">Contact Us</Link>
           </li>
-          {/* Show Logout option always */}
           <li className="nav-item">
             <button className="nav-link btn btn-link" onClick={handleLogout}>
               Logout
@@ -64,7 +63,6 @@ function Navbar({ searchBar }) {
           </li>
         </ul>
 
-        {/* Sidebar for Small Screens */}
         <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
           <span className="sidebar-close" onClick={toggleSidebar}>×</span>
           <ul>
@@ -78,7 +76,7 @@ function Navbar({ searchBar }) {
               <Link className="nav-link" to="/about" onClick={toggleSidebar}>About Us</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/Reviews" onClick={toggleSidebar}>Reviews</Link>
+              <Link className="nav-link" to="/reviews" onClick={toggleSidebar}>Reviews</Link>
             </li>
             <li>
               <Link className="nav-link" to="/contact" onClick={toggleSidebar}>Contact Us</Link>
@@ -94,7 +92,6 @@ function Navbar({ searchBar }) {
           </ul>
         </div>
 
-        {/* Search Bar */}
         {searchBar && (
           <form className="d-flex">
             <input

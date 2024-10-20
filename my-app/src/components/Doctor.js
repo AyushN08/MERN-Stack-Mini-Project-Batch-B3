@@ -1,8 +1,8 @@
 import "../App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Doctor.css";
-import "./MyVaccines.css"
+import "./MyVaccines.css";
 
 function Doctor() {
   const [email, setEmail] = useState(""); // State for user email
@@ -11,6 +11,14 @@ function Doctor() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("token"); // Retrieve token from local storage
+
+  // Use effect to load email from local storage on component mount
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
 
   // Fetch user ID based on the email
   const fetchUserId = async () => {
@@ -23,6 +31,9 @@ function Doctor() {
 
       setUserId(response.data._id);
       fetchUserVaccines(response.data._id); // Fetch vaccines for the user
+
+      // Save email to local storage
+      localStorage.setItem("email", email);
     } catch (error) {
       console.error("Error fetching user ID:", error);
       setError("Error fetching user ID");
@@ -96,6 +107,7 @@ function Doctor() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="email-input" // Add class for styling
         />
         <button type="submit" className="btn btn-primary">Fetch Vaccines</button>
       </form>

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require("../Models/User");
 const VaccineModel = require("../Models/Vaccine");
-const UserVaccineModel = require("../Models/UserVaccine"); // Import UserVaccine model
+const UserVaccineModel = require("../Models/userVaccine");
 
 // Signup function
 const signup = async (req, res) => {

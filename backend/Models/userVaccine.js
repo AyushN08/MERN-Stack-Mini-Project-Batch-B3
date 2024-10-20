@@ -21,6 +21,6 @@ const UserVaccineSchema = new mongoose.Schema({
   }
 }, { timestamps: true });  // Automatically manage createdAt and updatedAt fields
 
-// Create and export the UserVaccine model
-const UserVaccine = mongoose.model('UserVaccine', UserVaccineSchema);
+// Create and export the UserVaccine model only if it does not exist
+const UserVaccine = mongoose.models.UserVaccine || mongoose.model('UserVaccine', UserVaccineSchema);
 module.exports = UserVaccine;
