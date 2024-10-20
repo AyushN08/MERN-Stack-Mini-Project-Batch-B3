@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS file for toast notifications
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import './Login.css';
 
 const Login = () => {
@@ -136,7 +136,7 @@ const Login = () => {
         </div>
       </section>
 
-      <ToastContainer /> {/* Include the ToastContainer to render toasts */}
+      <ToastContainer />
     </div>
   );
 };
