@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { useLocation } from "react-router-dom"; // Import useLocation here
 import Reviews from "./components/Reviews";
+import Dashboard from "./components/Dashboard";
 function App() {
   return (
     <Router>
@@ -32,13 +33,13 @@ function AppContent() {
       <Routes>
         <Route path="/signin" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route exact path="/" element={<Homepage />} />
-        <Route exact path="/doctor" element={<Doctor />} />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/contact" element={<ContactUs />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/doctor" element={<Doctor />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/myVaccines" element={<MyVaccines />} />
-        <Route path="/Reviews" element={<Reviews/>}/>
-
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/dashboard" element={<Dashboard />} /> {/* New Route for Dashboard */}
       </Routes>
       
       {!hideNavAndFooter && <Footer />}
