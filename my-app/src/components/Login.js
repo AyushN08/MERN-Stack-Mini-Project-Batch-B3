@@ -44,7 +44,7 @@ const Login = () => {
         localStorage.setItem('token', result.jwtToken);
         localStorage.setItem('loggedInUserEmail', email);
         toast.success('Login Successful');
-        navigate('/');
+        navigate('/homepage');
       } else {
         toast.error(result.message); // Use toast for error
       }

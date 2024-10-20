@@ -11,7 +11,7 @@ function Navbar({ searchBar }) {
     const token = localStorage.getItem('token');
     
     // List of protected routes
-    const protectedRoutes = ['/', '/myVaccines', '/about', '/reviews', '/contact'];
+    const protectedRoutes = ['/homepage', '/myVaccines', '/about', '/reviews', '/contact'];
 
     // Check if the current path is in the protected routes and if the token is absent
     if (protectedRoutes.includes(location.pathname) && !token) {
@@ -42,7 +42,7 @@ function Navbar({ searchBar }) {
 
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link" to="/homepage">Home</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/myVaccines">My Vaccines</Link>

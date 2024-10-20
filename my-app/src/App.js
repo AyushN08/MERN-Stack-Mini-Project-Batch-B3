@@ -12,7 +12,7 @@ import Register from "./components/Register";
 import Reviews from "./components/Reviews";
 import VaccineDashboard from "./AdminComponents/VaccineDashboard";
 import DoctorDashboard from "./AdminComponents/DoctorDashboard";
-
+import LandingPage from "./components/LandingPage";
 function App() {
   return (
     <Router>
@@ -29,7 +29,7 @@ function AppContent() {
 
   // Define paths where you don't want the Navbar and Footer to appear
   const hideNavAndFooter = 
-    ['/signin', '/register', '/vaccinedashboard', '/doctordashboard'].some(path => currentPath.startsWith(path));
+  ['/','/signin', '/register', '/vaccinedashboard', '/doctordashboard'].includes(currentPath);
 
   return (
     <>
@@ -37,9 +37,10 @@ function AppContent() {
       {!hideNavAndFooter && <Navbar searchBar={false} />}
       
       <Routes>
+      <Route path="/" element={<LandingPage/>} />
         <Route path="/signin" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Homepage />} />
+        <Route path="/homepage" element={<Homepage />} />
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
@@ -47,6 +48,10 @@ function AppContent() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/vaccinedashboard" element={<VaccineDashboard />} />
         <Route path="/doctordashboard" element={<DoctorDashboard />} />
+      
+   
+   
+
       </Routes>
       
       {/* Footer should not be visible on certain routes */}
