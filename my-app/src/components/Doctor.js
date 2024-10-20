@@ -1,171 +1,128 @@
 import "../App.css";
-import Vaccine from "./Vaccine";
-import React, { useState, useEffect } from "react";
-import AddVaccine from "./AddVaccine.js";
-import "./Doctor.css"; 
+import React, { useState } from "react";
+import axios from "axios";
+import "./Doctor.css";
+import "./MyVaccines.css"
+
 function Doctor() {
-  const initVaccine = [
-    {
-      sno: 1,
-      name: "BCG",
-      desc: "Prevents tuberculosis (TB). Given at birth or as early as possible.",
-      ageLimit: "0-1 month",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 2,
-      name: "Hepatitis B",
-      desc: "Prevents Hepatitis B, a serious liver infection. First dose at birth.",
-      ageLimit: "0-1 month",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 3,
-      name: "OPV (Oral Polio Vaccine)",
-      desc: "Protects against poliovirus. First dose at birth.",
-      ageLimit: "0-1 month",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 4,
-      name: "DPT",
-      desc: "Prevents diphtheria, pertussis, and tetanus. Multiple doses from 6 weeks to 6 years.",
-      ageLimit: "6 weeks - 6 years",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 5,
-      name: "Hib (Haemophilus influenzae type B)",
-      desc: "Prevents Hib infections that can cause meningitis, pneumonia, and more.",
-      ageLimit: "6 weeks - 6 years",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 6,
-      name: "Rotavirus",
-      desc: "Prevents rotavirus infection, which causes severe diarrhea in children.",
-      ageLimit: "6 weeks - 8 months",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 7,
-      name: "Measles",
-      desc: "Protects against measles. First dose at 9-12 months, second dose at 16-24 months.",
-      ageLimit: "9 months - 24 months",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 8,
-      name: "MMR (Measles, Mumps, Rubella)",
-      desc: "Protects against measles, mumps, and rubella. Given at 9 months and 15-18 months.",
-      ageLimit: "9 months - 18 months",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 9,
-      name: "Varicella (Chickenpox)",
-      desc: "Prevents chickenpox. Given at 12-18 months.",
-      ageLimit: "12 months - 18 months",
-      govtPrice: 0,
-      completed: false,
-    },
-    {
-      sno: 10,
-      name: "Typhoid",
-      desc: "Protects against typhoid fever. First dose at 2 years.",
-      ageLimit: "2 years",
-      govtPrice: 0,
-      completed: false,
-    },
-  ];
+  const [email, setEmail] = useState(""); // State for user email
+  const [userId, setUserId] = useState(""); // State for user ID
+  const [vaccines, setVaccines] = useState([]); // State for storing fetched vaccines
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const token = localStorage.getItem("token"); // Retrieve token from local storage
 
-  const [vaccines, setVaccines] = useState(() => {
-    const savedVaccines = localStorage.getItem("vaccines");
-    return savedVaccines ? JSON.parse(savedVaccines) : initVaccine;
-  });
+  // Fetch user ID based on the email
+  const fetchUserId = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/auth/get-user-id?email=${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const [showCompleted, setShowCompleted] = useState(true);
-
-  useEffect(() => {
-    localStorage.setItem("vaccines", JSON.stringify(vaccines));
-  }, [vaccines]);
-
-  const onDelete = (vaccine) => {
-    setVaccines(vaccines.filter((e) => e !== vaccine));
-    localStorage.setItem("vaccines", JSON.stringify(vaccines));
+      setUserId(response.data._id);
+      fetchUserVaccines(response.data._id); // Fetch vaccines for the user
+    } catch (error) {
+      console.error("Error fetching user ID:", error);
+      setError("Error fetching user ID");
+    }
   };
 
-  const addVaccine = (name, desc, ageLimit, govtPrice) => {
-    let sno = vaccines.length > 0 ? vaccines[vaccines.length - 1].sno + 1 : 1;
-    const myVaccine = {
-      sno: sno,
-      name: name,
-      desc: desc,
-      ageLimit: ageLimit,
-      govtPrice: govtPrice,
-      completed: false,
-    };
-    setVaccines([...vaccines, myVaccine]);
+  // Fetch vaccines for the user
+  const fetchUserVaccines = async (userId) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`http://localhost:8080/user-vaccines/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setVaccines(response.data);
+    } catch (error) {
+      console.error("Error fetching user vaccines:", error);
+      setError("Error fetching user vaccines");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const markComplete = (vaccine) => {
-    const updatedVaccines = vaccines.map((v) => {
-      if (v.sno === vaccine.sno) {
-        v.completed = !v.completed;
-        if (v.completed) {
-          v.completionInfo = {
-            completedBy: "Doctor Himanshu Garg",
-            completedDate: new Date().toLocaleString(),
-          };
-        } else {
-          v.completionInfo = null;
-        }
+  // Mark a vaccine as complete
+  const markComplete = async (vaccine) => {
+    try {
+      console.log("Marking complete for:", {
+        userId: userId,
+        vaccineId: vaccine.vaccineId._id,
+      });
+
+      // Use the correct endpoint with userId and vaccineId in the URL
+      const response = await axios.put(`http://localhost:8080/user-vaccines/${userId}/${vaccine.vaccineId._id}`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(response.data); // Log the response
+
+      if (response.data.success) {
+        console.log("Vaccine marked complete:", vaccine._id);
+        // Update the local state to reflect the completion status
+        setVaccines((prevVaccines) =>
+          prevVaccines.map((v) =>
+            v._id === vaccine._id ? { ...v, isCompleted: true } : v
+          )
+        );
       }
-      return v;
-    });
-    setVaccines(updatedVaccines);
-    localStorage.setItem("vaccines", JSON.stringify(updatedVaccines));
+    } catch (error) {
+      console.error("Error marking vaccine as complete:", error.response?.data || error);
+      setError("Error marking vaccine as complete");
+    }
   };
 
-  const toggleCompletedVisibility = () => {
-    setShowCompleted(!showCompleted);
-  };
-
-  const resetVaccines = () => {
-    setVaccines(initVaccine);
+  const handleEmailSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    fetchUserId(); // Fetch user ID based on email
   };
 
   return (
     <div className="doctor-container">
       <h2 className="title">Doctor Vaccine Dashboard</h2>
-      <Vaccine
-        vaccines={vaccines}
-        onDelete={onDelete}
-        markComplete={markComplete}
-        showCompleted={showCompleted}
-      />
-      <div className="container text-center my-3">
-        <div className="button-group">
-          <button onClick={resetVaccines} className="btn btn-danger mx-2">
-            Reset All
-          </button>
-          <button
-            onClick={toggleCompletedVisibility}
-            className="btn btn-secondary mx-2"
-          >
-            {showCompleted ? "Hide Completed" : "Show Completed"}
-          </button>
+
+      {/* Input field for email */}
+      <form onSubmit={handleEmailSubmit} className="email-form">
+        <input
+          type="email"
+          placeholder="Enter User Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <button type="submit" className="btn btn-primary">Fetch Vaccines</button>
+      </form>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : vaccines.length > 0 ? (
+        <div className="vaccine-list">
+          {vaccines.map((vaccine) => (
+            <div key={vaccine._id} className="vaccine-card">
+              <h5>{vaccine.vaccineId.name}</h5>
+              <p>{vaccine.vaccineId.description}</p>
+              {vaccine.isCompleted ? (
+                <p className="completed">Marked as Complete</p>
+              ) : (
+                <button onClick={() => markComplete(vaccine)} className="btn btn-success">
+                  Mark Complete
+                </button>
+              )}
+            </div>
+          ))}
         </div>
-      </div>
-      <AddVaccine addVaccine={addVaccine} />
+      ) : (
+        <p>No vaccines found for this user.</p>
+      )}
     </div>
   );
 }

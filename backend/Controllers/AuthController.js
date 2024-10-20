@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require("../Models/User");
+const VaccineModel = require("../Models/Vaccine");
+const UserVaccineModel = require("../Models/UserVaccine"); // Import UserVaccine model
 
 // Signup function
 const signup = async (req, res) => {
@@ -29,7 +31,19 @@ const signup = async (req, res) => {
         });
 
         // Save user to database
-        await userModel.save();
+        const savedUser = await userModel.save();
+
+        // Automatically assign all vaccines to the new user
+        const vaccines = await VaccineModel.find(); // Fetch all vaccines
+        const userVaccines = vaccines.map(vaccine => ({
+            userId: savedUser._id,
+            vaccineId: vaccine._id,
+            isCompleted: false
+        }));
+
+        // Insert user-vaccine entries
+        await UserVaccineModel.insertMany(userVaccines);
+
         res.status(201).json({
             message: "Signup successful",
             success: true
@@ -90,7 +104,37 @@ const login = async (req, res) => {
     }
 };
 
+// New function to get user ID by email
+const getUserIdByEmail = async (req, res) => {
+    try {
+        const { email } = req.query; // Get email from query parameters
+
+        // Find user by email
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found',
+                success: false
+            });
+        }
+
+        // Respond with the user ID
+        res.status(200).json({
+            _id: user._id,
+            message: 'User ID retrieved successfully',
+            success: true
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
+    }
+};
+
 module.exports = {
     signup,
-    login
+    login,
+    getUserIdByEmail // Export the new function
 };

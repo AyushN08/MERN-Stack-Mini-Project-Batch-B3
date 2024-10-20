@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import VaccineForm from './VaccineForm';
 import VaccineList from './VaccineList';
+import AdminNavbar from './AdminNavbar';
 
-const Dashboard = () => {
+const VaccineDashboard = () => { // Changed to VaccineDashboard
   const [vaccines, setVaccines] = useState([]);
   const [editingVaccineId, setEditingVaccineId] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -44,36 +45,39 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Vaccine Management Dashboard</h1>
-      <div className="mt-4">
-        <button className="btn btn-success" onClick={() => setIsFormVisible(true)}>
-          Add Vaccine
-        </button>
-      </div>
-
-      {isFormVisible && (
+    <>
+      <AdminNavbar/>
+      <div className="container">
+        <h1>Vaccine Management Dashboard</h1>
         <div className="mt-4">
-          <VaccineForm
-            vaccineId={editingVaccineId}
-            onVaccineSaved={handleVaccineSaved}
-            onCancel={() => {
-              setEditingVaccineId(null);
-              setIsFormVisible(false);
-            }}
+          <button className="btn btn-success" onClick={() => setIsFormVisible(true)}>
+            Add Vaccine
+          </button>
+        </div>
+
+        {isFormVisible && (
+          <div className="mt-4">
+            <VaccineForm
+              vaccineId={editingVaccineId}
+              onVaccineSaved={handleVaccineSaved}
+              onCancel={() => {
+                setEditingVaccineId(null);
+                setIsFormVisible(false);
+              }}
+            />
+          </div>
+        )}
+
+        <div className="mt-4">
+          <VaccineList
+            vaccines={vaccines}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         </div>
-      )}
-
-      <div className="mt-4">
-        <VaccineList
-          vaccines={vaccines}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
       </div>
-    </div>
+    </>
   );
 };
 
-export default Dashboard;
+export default VaccineDashboard; // Make sure you are exporting the right name

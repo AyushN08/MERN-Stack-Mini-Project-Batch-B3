@@ -5,13 +5,14 @@ import Doctor from "./components/Doctor";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import ContactUs from "./components/ContactUs";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MyVaccines from "./components/myVaccines";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"; 
+import MyVaccines from "./components/myVaccines"; // Keeping the original name
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { useLocation } from "react-router-dom"; // Import useLocation here
 import Reviews from "./components/Reviews";
-import Dashboard from "./components/Dashboard";
+import VaccineDashboard from "./AdminComponents/VaccineDashboard";
+import DoctorDashboard from "./AdminComponents/DoctorDashboard";
+
 function App() {
   return (
     <Router>
@@ -23,11 +24,16 @@ function App() {
 function AppContent() {
   const location = useLocation();
 
+  // Normalize pathname for case-insensitive comparison
+  const currentPath = location.pathname.toLowerCase();
+
   // Define paths where you don't want the Navbar and Footer to appear
-  const hideNavAndFooter = location.pathname === '/signin' || location.pathname === '/register';
+  const hideNavAndFooter = 
+    ['/signin', '/register', '/vaccinedashboard', '/doctordashboard'].some(path => currentPath.startsWith(path));
 
   return (
     <>
+      {/* Conditional rendering of Navbar */}
       {!hideNavAndFooter && <Navbar searchBar={false} />}
       
       <Routes>
@@ -39,9 +45,11 @@ function AppContent() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/myVaccines" element={<MyVaccines />} />
         <Route path="/reviews" element={<Reviews />} />
-        <Route path="/dashboard" element={<Dashboard />} /> {/* New Route for Dashboard */}
+        <Route path="/vaccinedashboard" element={<VaccineDashboard />} />
+        <Route path="/doctordashboard" element={<DoctorDashboard />} />
       </Routes>
       
+      {/* Footer should not be visible on certain routes */}
       {!hideNavAndFooter && <Footer />}
     </>
   );
