@@ -13,6 +13,7 @@ import Reviews from "./components/Reviews";
 import VaccineDashboard from "./AdminComponents/VaccineDashboard";
 import DoctorDashboard from "./AdminComponents/DoctorDashboard";
 import LandingPage from "./components/LandingPage";
+import DoctorLogin from "./components/DoctorLogin";
 function App() {
   return (
     <Router>
@@ -47,6 +48,7 @@ function AppContent() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/vaccinedashboard" element={<VaccineDashboard />} />
         <Route path="/doctordashboard" element={<DoctorDashboard />} />
+        <Route path="DoctorLogin" element={<DoctorLogin/>}/>
       
    
    

@@ -61,20 +61,7 @@ body {
     align-items: center; /* Center buttons */
   }
   
-  .btn {
-    background-color: #388e3c; /* Green button */
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition effects */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Full width buttons */
-  }
+ 
   
   .btn:hover {
     background-color: #1b5e20; /* Darker green on hover */
