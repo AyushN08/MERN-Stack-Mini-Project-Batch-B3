@@ -8,8 +8,8 @@ function LandingPage() {
       <h1>Welcome to ImmuniLink</h1>
       <div className="button-group">
         <Link to="/signin" className="btn">User Login</Link>
-        <Link to="/signin" className="btn">Doctor Login</Link>
-        <Link to="/signin" className="btn">Admin Login</Link>
+        <Link to="/Doctor" className="btn">Doctor Login</Link>
+        <Link to="/DoctorDashboard" className="btn">Admin Login</Link>
       </div>
     </div>
   );

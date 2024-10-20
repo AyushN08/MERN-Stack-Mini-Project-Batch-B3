@@ -24,7 +24,6 @@ function App() {
 function AppContent() {
   const location = useLocation();
 
-  // Normalize pathname for case-insensitive comparison
   const currentPath = location.pathname.toLowerCase();
 
   // Define paths where you don't want the Navbar and Footer to appear
@@ -33,7 +32,7 @@ function AppContent() {
 
   return (
     <>
-      {/* Conditional rendering of Navbar */}
+     
       {!hideNavAndFooter && <Navbar searchBar={false} />}
       
       <Routes>
