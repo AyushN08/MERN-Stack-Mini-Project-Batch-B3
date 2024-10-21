@@ -109,7 +109,7 @@ function Doctor() {
           required
           className="email-input" // Add class for styling
         />
-        <button type="submit" className="btn btn-primary">Fetch Vaccines</button>
+        <button type="submit" className="btn btn-primary"> <i className="fas fa-search"></i>Fetch Vaccines</button>
       </form>
 
       {loading ? (
@@ -126,7 +126,7 @@ function Doctor() {
                 <p className="completed">Marked as Complete</p>
               ) : (
                 <button onClick={() => markComplete(vaccine)} className="btn btn-success">
-                  Mark Complete
+                <i className="fas fa-check"></i>Mark Complete
                 </button>
               )}
             </div>
