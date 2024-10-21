@@ -17,8 +17,8 @@ function LandingPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3500); // Change image every 4 seconds
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    }, 3500); // Change image every 3.5 seconds
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -29,13 +29,13 @@ function LandingPage() {
       <div className="content-container">
         <h1 className="title">Welcome to ImmuniLink</h1>
         <div className="button-group">
-          <Link to="/signin" className="btn">
+          <Link to="/signin" className="login-button">
             <FaUser /> User Login
           </Link>
-          <Link to="/RequestOtp" className="btn">
+          <Link to="/RequestOtp" className="login-button">
             <FaUserMd /> Doctor Login
           </Link>
-          <Link to="/DoctorDashboard" className="btn">
+          <Link to="/DoctorDashboard" className="login-button">
             <FaShieldAlt /> Admin Login
           </Link>
         </div>

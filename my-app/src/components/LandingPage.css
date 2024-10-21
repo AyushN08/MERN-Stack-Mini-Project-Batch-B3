@@ -1,131 +1,120 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .landing-page {
-    display: flex; /* Use flexbox for layout */
-    height: 100vh;
-    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-  }
-  
-  .image-container {
-    flex: 1; /* Takes up 50% of the width */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* For positioning the image */
-    overflow: hidden; /* Prevent overflow of images */
-  }
-  
-  .immunilink-image {
-    width: 100%; /* Make all images take full width */
-    height: 100%; /* Ensure height is uniform */
-    object-fit: cover; /* Maintain aspect ratio and cover the area */
-    border-radius: 10px; /* Optional: round corners of images */
-  }
-  
-  .content-container {
-    flex: 1; /* Takes up 50% of the width */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    padding: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.landing-page {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.immunilink-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #388e3c;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.login-button {
+  font-size: 1.1rem;
+  padding: 12px 28px;
+  background-color: #4caf50;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  width: 80%; /* Make the buttons wider for a better placement */
+  max-width: 280px;
+}
+
+.login-button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-3px); /* Subtle lift effect */
+}
+
+.login-button i {
+  margin-right: 8px;
+  font-size: 1.4rem;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1024px) {
   .title {
-    font-size: 3rem; /* Adjust title size */
-    margin-bottom: 10px; /* Reduced margin for a tighter look */
-    color: #388e3c; /* Change title color for better visibility */
-    text-align: center; /* Center align title */
-    text-transform: uppercase; /* Make title uppercase for emphasis */
-    letter-spacing: 2px; /* Increase letter spacing */
-    line-height: 1.2; /* Improved line height for better readability */
+    font-size: 2rem;
   }
-  
-  .subtitle {
-    font-size: 1.5rem; /* Subtitle size */
-    margin-bottom: 30px; /* Space below subtitle */
-    color: #555; /* Color for subtitle */
-    text-align: center; /* Center align subtitle */
-    max-width: 600px; /* Limit width for better readability */
+
+  .login-button {
+    font-size: 1rem;
+    padding: 10px 22px;
   }
-  
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between buttons */
-    width: 100%; /* Make button group full width */
-    align-items: center; /* Center buttons */
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
   }
-  
- 
-  
-  .btn:hover {
-    background-color: #1b5e20; /* Darker green on hover */
-    transform: translateY(-3px); /* Slight upward movement on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+
+  .login-button {
+    font-size: 1rem;
+    padding: 10px 20px;
   }
-  
-  .btn i {
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 1.5rem; /* Larger icons for better visibility */
+
+  .image-container,
+  .content-container {
+    flex: 1;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .title {
-      font-size: 2.5rem; /* Smaller heading on tablets */
-    }
-  
-    .subtitle {
-      font-size: 1.2rem; /* Smaller subtitle */
-    }
-  
-    .btn {
-      font-size: 1.1rem; /* Slightly smaller button text */
-      padding: 12px 25px; /* Adjust button padding */
-    }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
   }
-  
-  @media (max-width: 768px) {
-    .title {
-      font-size: 2rem; /* Smaller heading on mobile */
-      margin-bottom: 10px; /* Adjust margin for smaller screens */
-    }
-  
-    .subtitle {
-      font-size: 1rem; /* Adjust subtitle size for mobile */
-      margin-bottom: 20px; /* Adjust spacing */
-    }
-  
-    .btn {
-      font-size: 1rem; /* Smaller button text */
-      padding: 10px 20px; /* Adjust button padding */
-    }
-  
-    .image-container,
-    .content-container {
-      flex: 1; /* Ensure both sections take equal width on mobile */
-    }
+
+  .login-button {
+    font-size: 0.9rem;
+    padding: 8px 18px;
   }
-  
-  @media (max-width: 480px) {
-    .title {
-      font-size: 1.5rem; /* Further decrease heading size for small devices */
-      margin-bottom: 10px; /* Reduce margin */
-    }
-  
-    .subtitle {
-      font-size: 0.9rem; /* Smaller subtitle for mobile */
-      margin-bottom: 15px; /* Adjust spacing */
-    }
-  
-    .btn {
-      font-size: 0.9rem; /* Smaller button text */
-      padding: 8px 15px; /* Adjust button padding */
-    }
-  }
-  
+}
