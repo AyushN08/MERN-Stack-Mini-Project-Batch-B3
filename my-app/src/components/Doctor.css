@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  position: relative;
+  align-items: center; /* Align items to center */
 }
 
 .email-input {
@@ -26,21 +26,13 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   width: 300px;
+  margin-left: 10px; /* Add some margin to separate the icon from input */
 }
 
-.email-input:focus {
-  border-color: #4caf50;
-  outline: none;
-}
-
-.email-form::before {
-  content: '\f0e0'; /* FontAwesome envelope icon */
-  font-family: 'FontAwesome';
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
+.email-icon {
+  color: #000000;
+  font-size: 1.2rem;
+  height: 18px;
 }
 
 button {
@@ -53,6 +45,7 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
+  margin-bottom: 40px;
 }
 
 button:hover {
@@ -89,3 +82,5 @@ button:hover {
   color: red;
   font-weight: bold;
 }
+
+
