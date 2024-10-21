@@ -32,7 +32,7 @@ function LandingPage() {
           <Link to="/signin" className="btn">
             <FaUser /> User Login
           </Link>
-          <Link to="/DoctorLogin" className="btn">
+          <Link to="/RequestOtp" className="btn">
             <FaUserMd /> Doctor Login
           </Link>
           <Link to="/DoctorDashboard" className="btn">

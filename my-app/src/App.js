@@ -14,6 +14,8 @@ import VaccineDashboard from "./AdminComponents/VaccineDashboard";
 import DoctorDashboard from "./AdminComponents/DoctorDashboard";
 import LandingPage from "./components/LandingPage";
 import DoctorLogin from "./components/DoctorLogin";
+import RequestOtp from "./components/RequestOtp";
+import VerifyOtp from "./components/VerifyOtp";
 function App() {
   return (
     <Router>
@@ -27,9 +29,10 @@ function AppContent() {
 
   const currentPath = location.pathname.toLowerCase();
 
-  // Define paths where you don't want the Navbar and Footer to appear
+  
   const hideNavAndFooter = 
-  ['/','/signin', '/register', '/vaccinedashboard', '/doctordashboard'].includes(currentPath);
+  ['/','/signin', '/register', '/vaccinedashboard', '/doctordashboard','/doctor','/requestotp','/verifyotp'].includes(currentPath);
+
 
   return (
     <>
@@ -48,7 +51,9 @@ function AppContent() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/vaccinedashboard" element={<VaccineDashboard />} />
         <Route path="/doctordashboard" element={<DoctorDashboard />} />
-        <Route path="DoctorLogin" element={<DoctorLogin/>}/>
+        <Route path="/DoctorLogin" element={<DoctorLogin/>}/>
+        <Route path="/RequestOtp" element={<RequestOtp/>}/>
+        <Route path="/VerifyOtp" element={<VerifyOtp/>}/>
       
    
    

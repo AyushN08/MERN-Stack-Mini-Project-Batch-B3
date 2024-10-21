@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const DoctorLogin = () => {
+const RequestOtp = () => {
     const [email, setEmail] = useState('');
-    const [otp, setOtp] = useState('');
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -14,22 +13,11 @@ const DoctorLogin = () => {
         try {
             const response = await axios.post('http://localhost:8080/otp/request-otp', { email });
             setMessage(response.data.message);
-        } catch (error) {
-            setMessage(error.response?.data.message || 'Error sending OTP. Please try again.');
-        }
-        setIsLoading(false);
-    };
-
-    const verifyOtp = async () => {
-        setIsLoading(true);
-        try {
-            const response = await axios.post('http://localhost:8080/otp/verify-otp', { email, otp });
-            setMessage(response.data.message);
             if (response.status === 200) {
-                navigate('/Doctor');
+                navigate('/verifyotp', { state: { email } });
             }
         } catch (error) {
-            setMessage(error.response?.data.message || 'Error verifying OTP. Please try again.');
+            setMessage(error.response?.data.message || 'Error sending OTP. Please try again.');
         }
         setIsLoading(false);
     };
@@ -40,7 +28,7 @@ const DoctorLogin = () => {
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="card-title text-center mb-4">Doctor Login</h2>
+                            <h2 className="card-title text-center mb-4">Doctor Login - Request OTP</h2>
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email address</label>
@@ -54,18 +42,6 @@ const DoctorLogin = () => {
                                         required
                                     />
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="otp" className="form-label">OTP</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="otp"
-                                        placeholder="Enter OTP"
-                                        value={otp}
-                                        onChange={(e) => setOtp(e.target.value)}
-                                        required
-                                    />
-                                </div>
                                 <div className="d-grid gap-2">
                                     <button
                                         type="button"
@@ -74,14 +50,6 @@ const DoctorLogin = () => {
                                         disabled={isLoading}
                                     >
                                         {isLoading ? 'Requesting OTP...' : 'Request OTP'}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-success btn-lg"
-                                        onClick={verifyOtp}
-                                        disabled={isLoading}
-                                    >
-                                        {isLoading ? 'Verifying...' : 'Verify OTP'}
                                     </button>
                                 </div>
                             </form>
@@ -98,4 +66,4 @@ const DoctorLogin = () => {
     );
 };
 
-export default DoctorLogin;
+export default RequestOtp;
