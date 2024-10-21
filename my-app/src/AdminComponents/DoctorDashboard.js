@@ -3,21 +3,23 @@ import axios from 'axios';
 import DoctorForm from './DoctorForm';
 import DoctorList from './DoctorList';
 import AdminNavbar from './AdminNavbar';
+import './DoctorDashboard.css'; 
+import { FaUserPlus } from 'react-icons/fa'; 
+import { FaUserMd } from 'react-icons/fa'; 
 
 const DoctorDashboard = () => {
   const [doctors, setDoctors] = useState([]);
   const [editingDoctorId, setEditingDoctorId] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  // Fetch doctors when the component loads
   useEffect(() => {
     fetchDoctors();
   }, []);
 
   const fetchDoctors = () => {
-    axios.get('http://localhost:8080/doctors') // Fetch all doctors from the backend
+    axios.get('http://localhost:8080/doctors')
       .then(response => {
-        setDoctors(response.data); // Update the state with the list of doctors
+        setDoctors(response.data);
       })
       .catch(error => {
         console.error('Error fetching doctors:', error);
@@ -25,20 +27,20 @@ const DoctorDashboard = () => {
   };
 
   const handleDoctorSaved = () => {
-    fetchDoctors(); // Fetch updated list of doctors after saving
-    setEditingDoctorId(null); // Reset editing state
-    setIsFormVisible(false); // Hide form
+    fetchDoctors();
+    setEditingDoctorId(null);
+    setIsFormVisible(false);
   };
 
   const handleEdit = (id) => {
-    setEditingDoctorId(id); // Set the doctor ID to edit
-    setIsFormVisible(true); // Show the form for editing
+    setEditingDoctorId(id);
+    setIsFormVisible(true);
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/doctors/${id}`) // Delete the doctor
+    axios.delete(`http://localhost:8080/doctors/${id}`)
       .then(() => {
-        setDoctors(doctors.filter(doctor => doctor._id !== id)); // Remove the deleted doctor from the list
+        setDoctors(doctors.filter(doctor => doctor._id !== id));
       })
       .catch(error => {
         console.error('Error deleting doctor:', error);
@@ -47,36 +49,36 @@ const DoctorDashboard = () => {
 
   return (
     <>
-   <AdminNavbar/>
-    <div className="container">
-      <h1>Doctor Management Dashboard</h1>
-      <div className="mt-4">
-        <button className="btn btn-success" onClick={() => setIsFormVisible(true)}>
-          Add Doctor
-        </button>
-      </div>
+      <AdminNavbar />
+      <div className="dashboard-container">
+        <h1 className="dashboard-title"><FaUserMd /> Doctor Management Dashboard</h1>
+        <div className="add-doctor-container">
+          <button className="btn-add-doctor" onClick={() => setIsFormVisible(true)}>
+            <FaUserPlus className="icon" /> Add Doctor
+          </button>
+        </div>
 
-      {isFormVisible && (
-        <div className="mt-4">
-          <DoctorForm
-            doctorId={editingDoctorId} // Pass the doctor ID if editing
-            onDoctorSaved={handleDoctorSaved} // Handle save success
-            onCancel={() => {
-              setEditingDoctorId(null); // Reset editing
-              setIsFormVisible(false); // Hide form
-            }}
+        {isFormVisible && (
+          <div className="form-container">
+            <DoctorForm
+              doctorId={editingDoctorId}
+              onDoctorSaved={handleDoctorSaved}
+              onCancel={() => {
+                setEditingDoctorId(null);
+                setIsFormVisible(false);
+              }}
+            />
+          </div>
+        )}
+
+        <div className="doctor-list-container">
+          <DoctorList
+            doctors={doctors}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         </div>
-      )}
-
-      <div className="mt-4">
-        <DoctorList
-          doctors={doctors} // Pass the list of doctors
-          onEdit={handleEdit} // Handle editing
-          onDelete={handleDelete} // Handle deleting
-        />
       </div>
-    </div>
     </>
   );
 };

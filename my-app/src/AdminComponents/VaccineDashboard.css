@@ -1,0 +1,88 @@
+/* Container Styling */
+.vaccine-dashboard {
+    padding: 30px;
+    background-color: #f1f5f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+  }
+  
+  /* Heading Styling */
+  .dashboard-heading {
+    font-size: 2.5rem;
+    color: #000000;
+    text-align: center;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .dashboard-icon {
+    font-size: 2rem;
+    color: #000000;
+  }
+  
+  /* Button Styling */
+  .add-btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    background-color: #218838;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+  
+  .icon {
+    font-size: 1.3rem;
+  }
+  
+  /* Form Container Styling */
+  .form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.4s ease;
+  }
+  
+  /* List Container */
+  .list-container {
+    margin-top: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+  }
+  
+  /* Smooth Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

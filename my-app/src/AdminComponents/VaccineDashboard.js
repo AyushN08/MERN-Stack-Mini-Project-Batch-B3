@@ -3,8 +3,10 @@ import axios from 'axios';
 import VaccineForm from './VaccineForm';
 import VaccineList from './VaccineList';
 import AdminNavbar from './AdminNavbar';
+import { FaPlus, FaSyringe } from 'react-icons/fa';
+import "./VaccineDashboard.css";
 
-const VaccineDashboard = () => { // Changed to VaccineDashboard
+const VaccineDashboard = () => {
   const [vaccines, setVaccines] = useState([]);
   const [editingVaccineId, setEditingVaccineId] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -47,16 +49,18 @@ const VaccineDashboard = () => { // Changed to VaccineDashboard
   return (
     <>
       <AdminNavbar/>
-      <div className="container">
-        <h1>Vaccine Management Dashboard</h1>
-        <div className="mt-4">
-          <button className="btn btn-success" onClick={() => setIsFormVisible(true)}>
-            Add Vaccine
+      <div className="container vaccine-dashboard">
+        <h1 className="dashboard-heading">
+          <FaSyringe className="dashboard-icon" /> Vaccine Management Dashboard
+        </h1>
+        <div className="add-btn-container mt-4">
+          <button className="btn btn-primary" onClick={() => setIsFormVisible(true)}>
+            <FaPlus className="icon" /> Add Vaccine
           </button>
         </div>
 
         {isFormVisible && (
-          <div className="mt-4">
+          <div className="mt-4 form-container">
             <VaccineForm
               vaccineId={editingVaccineId}
               onVaccineSaved={handleVaccineSaved}
@@ -68,7 +72,7 @@ const VaccineDashboard = () => { // Changed to VaccineDashboard
           </div>
         )}
 
-        <div className="mt-4">
+        <div className="mt-4 list-container">
           <VaccineList
             vaccines={vaccines}
             onEdit={handleEdit}
@@ -80,4 +84,4 @@ const VaccineDashboard = () => { // Changed to VaccineDashboard
   );
 };
 
-export default VaccineDashboard; // Make sure you are exporting the right name
+export default VaccineDashboard;

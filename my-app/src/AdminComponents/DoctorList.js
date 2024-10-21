@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import "./DoctorList.css";
 
 const DoctorList = ({ doctors, onEdit, onDelete }) => {
   const [deleteError, setDeleteError] = useState('');
@@ -18,13 +20,13 @@ const DoctorList = ({ doctors, onEdit, onDelete }) => {
   };
 
   return (
-    <div>
+    <div className="doctor-list-container">
       {deleteError && <div className="alert alert-danger">{deleteError}</div>}
 
       {doctors.length === 0 ? (
-        <p>No doctors available. Add a doctor to get started.</p>
+        <p className="no-doctors-message">No doctors available. Add a doctor to get started.</p>
       ) : (
-        <table className="table table-striped table-bordered">
+        <table className="doctor-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -35,15 +37,25 @@ const DoctorList = ({ doctors, onEdit, onDelete }) => {
             </tr>
           </thead>
           <tbody>
-            {doctors.map(doctor => (
+            {doctors.map((doctor) => (
               <tr key={doctor._id}>
                 <td>{doctor.name}</td>
                 <td>{doctor.specialization}</td>
                 <td>{doctor.email}</td>
                 <td>{doctor.phone}</td>
                 <td>
-                  <button className="btn btn-warning" onClick={() => onEdit(doctor._id)}>Edit</button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(doctor._id)}>Delete</button>
+                  <button
+                    className="btn-edit"
+                    onClick={() => onEdit(doctor._id)}
+                  >
+                    <FaEdit className="icon" /> Edit
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => handleDelete(doctor._id)}
+                  >
+                    <FaTrashAlt className="icon" /> Delete
+                  </button>
                 </td>
               </tr>
             ))}
