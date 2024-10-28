@@ -16,6 +16,7 @@ const DoctorDashboard = () => {
     fetchDoctors();
   }, []);
 
+  // Fetch doctors from the server
   const fetchDoctors = () => {
     axios.get('http://localhost:8080/doctors')
       .then(response => {
@@ -26,25 +27,28 @@ const DoctorDashboard = () => {
       });
   };
 
+  // Handle saving or editing a doctor
   const handleDoctorSaved = () => {
-    fetchDoctors();
+    fetchDoctors(); // Refetch the updated doctor list after saving
     setEditingDoctorId(null);
     setIsFormVisible(false);
   };
 
+  // Handle doctor edit
   const handleEdit = (id) => {
     setEditingDoctorId(id);
     setIsFormVisible(true);
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8080/doctors/${id}`)
-      .then(() => {
-        setDoctors(doctors.filter(doctor => doctor._id !== id));
-      })
-      .catch(error => {
-        console.error('Error deleting doctor:', error);
-      });
+  // Handle doctor deletion
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/doctors/${id}`);
+      // Optimistically update the UI without refetching data
+      setDoctors(doctors.filter(doctor => doctor._id !== id));
+    } catch (error) {
+      console.error('Error deleting doctor:', error);
+    }
   };
 
   return (
@@ -52,17 +56,19 @@ const DoctorDashboard = () => {
       <AdminNavbar />
       <div className="dashboard-container">
         <h1 className="dashboard-title"><FaUserMd /> Doctor Management Dashboard</h1>
+
         <div className="add-doctor-container">
           <button className="btn-add-doctor" onClick={() => setIsFormVisible(true)}>
             <FaUserPlus className="icon" /> Add Doctor
           </button>
         </div>
 
+        {/* Doctor Form for Adding/Editing */}
         {isFormVisible && (
           <div className="form-container">
             <DoctorForm
               doctorId={editingDoctorId}
-              onDoctorSaved={handleDoctorSaved}
+              onDoctorSaved={handleDoctorSaved}  // Refetch doctor list after save
               onCancel={() => {
                 setEditingDoctorId(null);
                 setIsFormVisible(false);
@@ -71,6 +77,7 @@ const DoctorDashboard = () => {
           </div>
         )}
 
+        {/* Doctor List */}
         <div className="doctor-list-container">
           <DoctorList
             doctors={doctors}

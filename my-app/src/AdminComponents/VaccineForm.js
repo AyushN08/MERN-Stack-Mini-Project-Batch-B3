@@ -68,8 +68,12 @@ const VaccineForm = ({ vaccineId, onVaccineSaved, onCancel }) => {
             govtPrice: Number(formData.govtPrice)
           });
 
-      await request;
-      onVaccineSaved(); 
+      const response = await request;
+
+      // Pass the newly saved or edited vaccine back to the parent
+      onVaccineSaved(response.data); 
+
+      // Reset form after saving
       setFormData({
         name: '',
         description: '',

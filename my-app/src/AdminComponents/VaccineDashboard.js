@@ -15,6 +15,7 @@ const VaccineDashboard = () => {
     fetchVaccines();
   }, []);
 
+  // Fetch all vaccines from the server
   const fetchVaccines = () => {
     axios.get('http://localhost:8080/vaccines')
       .then(response => {
@@ -25,8 +26,18 @@ const VaccineDashboard = () => {
       });
   };
 
-  const handleVaccineSaved = () => {
-    fetchVaccines();
+  // Handle vaccine addition or editing
+  const handleVaccineSaved = (newVaccine) => {
+    if (editingVaccineId) {
+      // Update an existing vaccine in the state
+      setVaccines(vaccines.map(vaccine =>
+        vaccine._id === newVaccine._id ? newVaccine : vaccine
+      ));
+    } else {
+      // Add a new vaccine to the state
+      setVaccines([...vaccines, newVaccine]);
+    }
+
     setEditingVaccineId(null);
     setIsFormVisible(false);
   };
@@ -36,6 +47,7 @@ const VaccineDashboard = () => {
     setIsFormVisible(true);
   };
 
+  // Handle deletion and update the state without refreshing
   const handleDelete = (id) => {
     axios.delete(`http://localhost:8080/vaccines/${id}`)
       .then(() => {
@@ -48,7 +60,7 @@ const VaccineDashboard = () => {
 
   return (
     <>
-      <AdminNavbar/>
+      <AdminNavbar />
       <div className="container vaccine-dashboard">
         <h1 className="dashboard-heading">
           <FaSyringe className="dashboard-icon" /> Vaccine Management Dashboard
@@ -63,7 +75,7 @@ const VaccineDashboard = () => {
           <div className="mt-4 form-container">
             <VaccineForm
               vaccineId={editingVaccineId}
-              onVaccineSaved={handleVaccineSaved}
+              onVaccineSaved={handleVaccineSaved} // Pass the new or edited vaccine back to the parent component
               onCancel={() => {
                 setEditingVaccineId(null);
                 setIsFormVisible(false);
