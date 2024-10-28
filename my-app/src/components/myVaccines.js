@@ -10,8 +10,7 @@ const MyVaccines = () => {
 
   useEffect(() => {
     const fetchUserVaccines = async () => {
-      // Extract JWT token from local storage
-      const token = localStorage.getItem("token"); // Make sure to use the same key here
+      const token = localStorage.getItem("token");
       const email = localStorage.getItem("loggedInUserEmail");
       
       if (!token || !email) {
@@ -25,10 +24,10 @@ const MyVaccines = () => {
       const userId = payload._id;
 
       try {
-        // Make an API call to fetch vaccines for the user
         const response = await axios.get(`http://localhost:8080/user-vaccines/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Cache-Control': 'no-cache',
           },
         });
         setVaccines(response.data);
@@ -40,7 +39,14 @@ const MyVaccines = () => {
       }
     };
 
+    // Fetch vaccines initially
     fetchUserVaccines();
+
+    // Set up polling to check for updates every 5 seconds
+    const intervalId = setInterval(fetchUserVaccines, 5000); // Poll every 5 seconds
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

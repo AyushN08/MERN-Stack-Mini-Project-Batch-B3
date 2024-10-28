@@ -26,6 +26,7 @@ function Doctor() {
       const response = await axios.get(`http://localhost:8080/auth/get-user-id?email=${email}`, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Cache-Control': 'no-cache',
         },
       });
 
@@ -59,36 +60,39 @@ function Doctor() {
   };
 
   // Mark a vaccine as complete
-  const markComplete = async (vaccine) => {
-    try {
-      console.log("Marking complete for:", {
-        userId: userId,
-        vaccineId: vaccine.vaccineId._id,
-      });
+  // Mark a vaccine as complete
+const markComplete = async (vaccine) => {
+  try {
+    console.log("Marking complete for:", {
+      userId: userId,
+      vaccineId: vaccine.vaccineId._id,
+    });
 
-      // Use the correct endpoint with userId and vaccineId in the URL
-      const response = await axios.put(`http://localhost:8080/user-vaccines/${userId}/${vaccine.vaccineId._id}`, {}, {
+    const response = await axios.put(
+      `http://localhost:8080/user-vaccines/${userId}/${vaccine.vaccineId._id}`,
+      {},  // No body needed
+      {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-
-      console.log(response.data); // Log the response
-
-      if (response.data.success) {
-        console.log("Vaccine marked complete:", vaccine._id);
-        // Update the local state to reflect the completion status
-        setVaccines((prevVaccines) =>
-          prevVaccines.map((v) =>
-            v._id === vaccine._id ? { ...v, isCompleted: true } : v
-          )
-        );
       }
-    } catch (error) {
-      console.error("Error marking vaccine as complete:", error.response?.data || error);
-      setError("Error marking vaccine as complete");
+    );
+
+    if (response.data.userVaccine) {
+      console.log("Vaccine marked complete:", response.data.userVaccine);
+
+      // Re-fetch the updated vaccine list after marking complete
+      await fetchUserVaccines(userId);
+    } else {
+      console.error("Error: Vaccine completion status not returned.");
     }
-  };
+  } catch (error) {
+    console.error("Error marking vaccine as complete:", error.response?.data || error);
+    setError("Error marking vaccine as complete");
+  }
+};
+
+  
 
   const handleEmailSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -101,18 +105,15 @@ function Doctor() {
 
       {/* Input field for email */}
       <form onSubmit={handleEmailSubmit} className="email-form">
-        <i className="fas fa-envelope email-icon"></i> {/* Email icon next to input */}
         <input
           type="email"
           placeholder="Enter User Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="email-input"
+          className="email-input" // Add class for styling
         />
-        <button type="submit" className="btn btn-primary">
-          <i className="fas fa-search"></i>Fetch Vaccines
-        </button>
+        <button type="submit" className="btn btn-primary"> <i className="fas fa-search"></i>Fetch Vaccines</button>
       </form>
 
       {loading ? (
@@ -129,7 +130,7 @@ function Doctor() {
                 <p className="completed">Marked as Complete</p>
               ) : (
                 <button onClick={() => markComplete(vaccine)} className="btn btn-success">
-                  <i className="fas fa-check"></i>Mark Complete
+                <i className="fas fa-check"></i>Mark Complete
                 </button>
               )}
             </div>
