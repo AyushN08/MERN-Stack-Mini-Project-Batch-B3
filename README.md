@@ -59,9 +59,9 @@ Doctors can access and manage patient vaccine information.
 Admins can manage users and doctors, and generate reports.
 
 ## Future Scope
-Mobile app development for better accessibility.
-Integration with external health APIs for real-time vaccine information.
-Enhanced user notifications for reminders and alerts.
-Advanced admin dashboard for analytics and reporting.
-Telemedicine features for online consultations.
-Improved security measures for data protection.
+1. Mobile app development for better accessibility.
+2. Integration with external health APIs for real-time vaccine information.
+3. Enhanced user notifications for reminders and alerts.
+4. Advanced admin dashboard for analytics and reporting.
+5. Telemedicine features for online consultations.
+6. Improved security measures for data protection.
