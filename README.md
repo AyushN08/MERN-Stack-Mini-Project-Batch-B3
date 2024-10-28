@@ -26,7 +26,7 @@ The Vaccine Management System is a web application designed to facilitate the ma
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/your-username/vaccine-management-system.git
+   git clone https://github.com/AyushN08/MERN-Stack-Mini-Project-Batch-B3.git
 
 2. Navigate to the project directory
   cd vaccine-management-system
